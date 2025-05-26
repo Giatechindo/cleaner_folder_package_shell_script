@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Determine script directory
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+
+# Load core library
+source "$SCRIPT_DIR/../lib/core.sh"
+
+# Initialize application
+init_cleanpack "$@"
+
+# Main menu
+while true; do
+    show_main_menu
+    read -rp "👉 Pilih menu [1-5]: " choice
+    
+    case $choice in
+        1) run_vendor_cleaner ;;
+        2) run_node_modules_cleaner ;;
+        3) run_both_cleaners ;;
+        4) show_settings_menu ;;
+        5) exit_cleanpack ;;
+        *) show_error "Pilihan tidak valid. Silakan coba lagi." ;;
+    esac
+    
+    pause
+done
